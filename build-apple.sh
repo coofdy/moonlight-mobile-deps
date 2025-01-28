@@ -14,5 +14,7 @@ set -e
 ./FFmpeg.sh arm64 appletvos tvos
 ./FFmpeg.sh arm64 appletvsimulator tvos-simulator
 ./FFmpeg.sh x86_64 appletvsimulator tvos-simulator
+./FFmpeg.sh arm64 macosx macos
+./FFmpeg.sh x86_64 macosx macos
 ./SDL-ios.sh
 ./SDL-tvos.sh
