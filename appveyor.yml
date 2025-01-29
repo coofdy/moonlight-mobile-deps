@@ -24,10 +24,12 @@ build_script:
   - sh: '[ "$BUILD_TARGET" != apple ] || ./build-apple.sh'
   - sh: '[ "$BUILD_TARGET" != android ] || ./build-android.sh'
   - sh: '[ "$BUILD_TARGET" != apple ] || ./archive-apple.sh'
+  - sh: '[ "$BUILD_TARGET" != apple ] || ./xcframeworks-apple.sh'
   - sh: '[ "$BUILD_TARGET" != android ] || ./archive-android.sh'
 
 after_build:
   - sh: '[ "$BUILD_TARGET" != apple ] || appveyor PushArtifact moonlight-apple-deps.zip'
+  - sh: '[ "$BUILD_TARGET" != apple ] || appveyor PushArtifact moonlight-apple-xcframeworks.zip'
   - sh: '[ "$BUILD_TARGET" != android ] || appveyor PushArtifact moonlight-android-deps.zip'
 
 deploy: off
