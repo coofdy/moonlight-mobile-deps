@@ -14,3 +14,38 @@ jobs:
       - name: Build
         run: |
           ./make-apple.sh
+
+      - name: Archive build artifacts
+        run: |
+          mkdir -p artifacts
+          mv *.zip artifacts/
+
+      - name: Upload ZIP files as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: apple-libraries
+          path: artifacts/*.zip
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: apple-libraries
+          path: artifacts
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: latest
+          name: Apple Libraries Release
+          draft: false
+          prerelease: false
+          artifacts: "artifacts/*.zip"
