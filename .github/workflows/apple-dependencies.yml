@@ -1,0 +1,16 @@
+name: Build Apple libraries and XCFrameworks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build all the apple dependencies
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build
+        run: |
+          ./make-apple.sh
