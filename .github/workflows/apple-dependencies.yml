@@ -11,6 +11,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Import code-signing keys
+        uses: apple-actions/import-codesign-certs@v3
+        with: 
+          p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
+          p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
+  
       - name: Build
         run: |
           ./make-apple.sh
