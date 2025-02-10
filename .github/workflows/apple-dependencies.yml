@@ -53,6 +53,8 @@ jobs:
         with:
           tag: latest
           name: Apple Libraries Release
+          allowUpdates: true
           draft: false
           prerelease: false
           artifacts: "artifacts/*.zip"
+          replacesArtifacts: true
